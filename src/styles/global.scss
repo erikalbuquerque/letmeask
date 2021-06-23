@@ -1,39 +1,40 @@
 :root {
-    --black: #050206;
-    --white-50: #ffffff;
-    --white-100: #fefefe;
-    --white-200: #f8f8f8;
-    --purple-100: #835afd;
-    --purple-300: #6f4bd8;
-    --blue: #485bff;
-    --red-50: #ea4335;
-    --red-100: #e73f5d;
-    --red-300: #d73754;
-    --gray-50: #dbdcdd;
-    --gray-100: #cecece;
-    --gray-200: #a8a8b3;
-    --gray-300: #7e7e86;
-    --gray-400: #737380;
-    --pink-50: #ff59f8;
-    --pink-100: #e559f9;
-    --pink-200: #d67ee2;
-    --text: #29292e;
+  --black: #050206;
+  --white-50: #ffffff;
+  --white-100: #fefefe;
+  --white-200: #f8f8f8;
+  --purple-100: #835afd;
+  --purple-300: #6f4bd8;
+  --blue: #485bff;
+  --red-50: #ea4335;
+  --red-100: #e73f5d;
+  --red-300: #d73754;
+  --gray: #e2e2e2;
+  --gray-50: #dbdcdd;
+  --gray-100: #cecece;
+  --gray-200: #a8a8b3;
+  --gray-300: #7e7e86;
+  --gray-400: #737380;
+  --pink-50: #ff59f8;
+  --pink-100: #e559f9;
+  --pink-200: #d67ee2;
+  --text: #29292e;
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    background: var(--white-100);
-    color: var(--text);
+  background: var(--white-100);
+  color: var(--text);
 }
 
 body,
 input,
 button,
 textarea {
-    font: 400 1rem "Roboto", sans-serif;
+  font: 400 1rem "Roboto", sans-serif;
 }
