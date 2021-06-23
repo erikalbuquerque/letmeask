@@ -1,10 +1,12 @@
 :root {
     --black: #050206;
-    --white-50: #fefefe;
-    --white-100: #f8f8f8;
+    --white-50: #ffffff;
+    --white-100: #fefefe;
+    --white-200: #f8f8f8;
     --purple-100: #835afd;
     --purple-300: #6f4bd8;
     --blue: #485bff;
+    --red-50: #ea4335;
     --red-100: #e73f5d;
     --red-300: #d73754;
     --gray-50: #dbdcdd;
@@ -21,7 +23,7 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: 0;
+    box-sizing: border-box;
 }
 
 body {
