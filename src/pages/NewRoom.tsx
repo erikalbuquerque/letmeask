@@ -1,5 +1,5 @@
 import { FormEvent, ChangeEvent, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { database } from '../services/firebase'
 import { useAuth } from '../hooks/useAuth'
 
@@ -16,6 +16,7 @@ type RoomType = {
 }
 
 export function NewRoom() {
+  const history = useHistory();
   const { user } = useAuth()
   const [newRoom, setNewRoom] = useState('')
 
@@ -35,7 +36,9 @@ export function NewRoom() {
 
     const roomRef = database.ref('rooms')
 
-    await roomRef.push(room)
+    const firebaseRoom = await roomRef.push(room)
+
+    history.push(`/rooms/${firebaseRoom.key}`)
 
   }
 
