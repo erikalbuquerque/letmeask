@@ -8,6 +8,7 @@ import { Button } from '../components/Button'
 import '../styles/newRoom.scss'
 
 export function NewRoom() {
+  
   return (
     <div id="page-auth">
       <aside>
