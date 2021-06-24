@@ -6,6 +6,7 @@ import { useAuth } from '../hooks/useAuth'
 
 import { Button } from '../components/Button'
 import { RoomCode } from '../components/RoomCode'
+import { Question } from '../components/Question'
 
 import logoImg from '../assets/images/logo.svg'
 
@@ -26,7 +27,7 @@ type FirebaseQuestions = Record<string, {
   isAnswered: boolean
 }>
 
-type Question = {
+type QuestionType = {
   id: string
   content: string
   author: {
@@ -43,7 +44,7 @@ export function Room() {
 
   const { user } = useAuth()
 
-  const [questions, setQuestions] = useState<Question[]>([])
+  const [questions, setQuestions] = useState<QuestionType[]>([])
   const [newQuestion, setNewQuestion] = useState('')
   const [title, setTitle] = useState('')
 
@@ -129,6 +130,16 @@ export function Room() {
             <Button type="submit" disabled={!user}>Enviar pergunta</Button>
           </div>
         </form>
+
+        <div className="question-list">
+          {questions.map(question => (
+            <Question
+              key={question.id}
+              content={question.content}
+              author={question.author}
+            />
+          ))}
+        </div>
       </main>
     </div>
   )
