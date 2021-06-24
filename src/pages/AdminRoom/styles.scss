@@ -1,0 +1,49 @@
+#page-room {
+  header {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--gray);
+    .content {
+      max-width: 1360px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      >img {
+        max-height: 2.813rem;
+      }
+      >div {
+        display: flex;
+        gap: 1rem;
+        button {
+          height: 2.5rem;
+        }
+      }
+    }
+  }
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    .room-title {
+      margin: 2rem 0 1.5rem;
+      display: flex;
+      font-size: 1.5rem;
+      h1 {
+        font-family: "Poppins", sans-serif;
+        font-size: 1.5rem;
+        color: var(--text);
+      }
+      span {
+        font-weight: 500;
+        font-size: 0.875rem;
+        margin-left: 1rem;
+        border-radius: 2rem;
+        padding: 0.5rem 1rem;
+        background: var(--pink-100);
+        color: var(--white-50);
+      }
+    }
+    .question-list {
+      margin-top: 2rem;
+    }
+  }
+}

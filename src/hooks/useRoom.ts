@@ -73,7 +73,8 @@ export function useRoom(roomId: string) {
         roomRef.off('value')
       }
     })
-  }, [returnLikeId, roomId, user?.id])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [roomId, user?.id])
 
   return { questions, title }
 }
