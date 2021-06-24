@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 
 import { database } from '../services/firebase'
 
@@ -20,11 +20,20 @@ type RoomParams = {
 
 export function AdminRoom() {
   //const { user } = useAuth()
+  const history = useHistory()
 
   const { id } = useParams<RoomParams>()
   const roomId = id
 
   const { questions, title } = useRoom(roomId)
+
+  async function handleEndRoom() {
+    const currentDate = { endedAt: new Date() }
+
+    await database.ref(`rooms/${roomId}`).update(currentDate)
+
+    history.push('/')
+  }
 
   async function handleDeleteQuestion(questionId: string) {
     const confirm = window.confirm('Tem certeza que você deseja excluir esta pergunta?')
@@ -40,7 +49,10 @@ export function AdminRoom() {
           <img src={logoImg} alt="Letmeask" />
           <div>
             <RoomCode code={roomId} />
-            <Button isOutlined>Encerrar sala</Button>
+            <Button
+              isOutlined
+              onClick={handleEndRoom}
+            >Encerrar sala</Button>
           </div>
         </div>
       </header>

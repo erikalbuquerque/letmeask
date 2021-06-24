@@ -40,6 +40,9 @@ export function Home() {
     if (!roomRef.exists())
       throw new Error('Room does not exists.')
 
+    if (roomRef.val().endedAt)
+      throw new Error('Room already closed.')
+
     history.push(`rooms/${roomCode}`)
   }
 
