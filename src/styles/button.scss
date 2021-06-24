@@ -14,6 +14,11 @@
   img {
     margin-right: 0.5rem;
   }
+  &.outlined {
+    background: var(--white-50);
+    border: 1px solid var(--purple-100);
+    color: var(--purple-100);
+  }
   &:not(:disabled):hover {
     filter: brightness(0.9);
   }
