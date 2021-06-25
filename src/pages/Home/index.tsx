@@ -4,6 +4,8 @@ import { useHistory } from 'react-router-dom'
 import { database } from '../../services/firebase'
 import { useAuth } from '../../hooks/useAuth'
 
+import { useToast } from '../../hooks/useToast'
+
 import illustrationImg from '../../assets/images/illustration.svg'
 import logoImg from '../../assets/images/logo.svg'
 import googleIconImg from '../../assets/images/google-icon.svg'
@@ -12,10 +14,10 @@ import { Button } from '../../components/Button'
 
 import './styles.scss'
 
-
 export function Home() {
   const history = useHistory()
   const { user, signInWithGoogle } = useAuth()
+  const { Toaster, handleToastError } = useToast()
 
   const [roomCode, setRoomCode] = useState('')
 
@@ -33,15 +35,16 @@ export function Home() {
   async function handleJoinRoom(event: FormEvent) {
     event.preventDefault()
 
-    if (roomCode.trim() === '') return
+    if (roomCode.trim() === '') 
+      return handleToastError('Empty room code, please fill in.')
 
     const roomRef = await database.ref(`rooms/${roomCode}`).get()
 
     if (!roomRef.exists())
-      throw new Error('Room does not exists.')
+      return handleToastError('Room does not exists.')
 
     if (roomRef.val().endedAt)
-      throw new Error('Room already closed.')
+      return handleToastError('Room already closed.')
 
     history.push(`rooms/${roomCode}`)
   }
@@ -79,6 +82,8 @@ export function Home() {
           </form>
         </div>
       </main>
+
+      <Toaster />
     </div>
   )
 }
