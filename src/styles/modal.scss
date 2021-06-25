@@ -1,0 +1,55 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  padding: 2rem;
+  border-radius: 0.5rem;
+  width: 590px;
+  background-color: var(--white-200);
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    svg {
+      width: 3rem;
+      height: 3rem;
+    }
+    svg path {
+      stroke: var(--red-100);
+    }
+    h1 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      font-family: "Poppins", sans-serif;
+      color: var(--text);
+    }
+    span {
+      font-size: 1rem;
+      color: var(--gray-400);
+      font-weight: 500;
+    }
+    >div {
+      display: flex;
+      gap: 0.5rem;
+      button {
+        font-size: 1rem;
+        background: var(--red-100);
+      }
+      button:first-child {
+        background: var(--gray-50);
+        color: var(--gray-400);
+      }
+    }
+  }
+}
