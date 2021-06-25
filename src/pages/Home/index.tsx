@@ -17,14 +17,15 @@ import './styles.scss'
 export function Home() {
   const history = useHistory()
   const { user, signInWithGoogle } = useAuth()
-  const { Toaster, handleToastError } = useToast()
+  const { handleToastError, handleToastPromise } = useToast()
 
   const [roomCode, setRoomCode] = useState('')
 
   async function handleCreateRoom() {
     if (!user)
-      await signInWithGoogle()
-
+      handleToastPromise(signInWithGoogle().then(() => {
+        history.push('/rooms/new')
+      }))
     history.push('/rooms/new')
   }
 
@@ -35,7 +36,7 @@ export function Home() {
   async function handleJoinRoom(event: FormEvent) {
     event.preventDefault()
 
-    if (roomCode.trim() === '') 
+    if (roomCode.trim() === '')
       return handleToastError('Empty room code, please fill in.')
 
     const roomRef = await database.ref(`rooms/${roomCode}`).get()
@@ -82,8 +83,6 @@ export function Home() {
           </form>
         </div>
       </main>
-
-      <Toaster />
     </div>
   )
 }

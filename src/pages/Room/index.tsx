@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import { database } from '../../services/firebase'
 import { useAuth } from '../../hooks/useAuth'
 import { useRoom } from '../../hooks/useRoom'
+import { useToast } from '../../hooks/useToast'
 
 import { Button } from '../../components/Button'
 import { RoomCode } from '../../components/RoomCode'
@@ -18,7 +19,9 @@ type RoomParams = {
 }
 
 export function Room() {
-  const { user } = useAuth()
+  const { user, signInWithGoogle } = useAuth()
+
+  const { handleToastError, handleToastPromise } = useToast()
 
   const { id } = useParams<RoomParams>()
   const roomId = id
@@ -34,9 +37,11 @@ export function Room() {
   async function handleSendQuestion(event: FormEvent) {
     event.preventDefault()
 
-    if (newQuestion.trim() === '') return
+    if (newQuestion.trim() === '')
+      return handleToastError('Empty question, please fill in.')
 
-    if (!user) throw new Error('You must be logged in')
+    if (!user)
+      return handleToastError('You must be logged in.')
 
     const question = {
       content: newQuestion,
@@ -54,6 +59,9 @@ export function Room() {
   }
 
   async function handleLikeQuestion(questionId: string, likeId: string | undefined) {
+    if (!user)
+      return handleToastError('You must be logged in.')
+
     if (likeId) {
       await database.ref(`/rooms/${roomId}/questions/${questionId}/likes/${likeId}`).remove()
     } else {
@@ -91,7 +99,7 @@ export function Room() {
                 <span>{user.name}</span>
               </div>
             ) : (
-              <span>Para enviar sua pergunta, <button>faça seu login</button>.</span>
+              <span>Para enviar sua pergunta, <button type="button" onClick={() => handleToastPromise(signInWithGoogle())}>faça seu login</button>.</span>
             )}
             <Button type="submit" disabled={!user}>Enviar pergunta</Button>
           </div>

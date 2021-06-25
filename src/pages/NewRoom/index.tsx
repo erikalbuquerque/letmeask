@@ -3,6 +3,8 @@ import { Link, useHistory } from 'react-router-dom'
 import { database } from '../../services/firebase'
 import { useAuth } from '../../hooks/useAuth'
 
+import { useToast } from '../../hooks/useToast'
+
 import illustrationImg from '../../assets/images/illustration.svg'
 import logoImg from '../../assets/images/logo.svg'
 
@@ -18,6 +20,9 @@ type RoomType = {
 export function NewRoom() {
   const history = useHistory();
   const { user } = useAuth()
+
+  const { handleToastError } = useToast()
+
   const [newRoom, setNewRoom] = useState('')
 
   function handleSetNewRoom(event: ChangeEvent<HTMLInputElement>) {
@@ -27,7 +32,8 @@ export function NewRoom() {
   async function handleCreateRoom(event: FormEvent) {
     event.preventDefault()
 
-    if (newRoom.trim() === '') return
+    if (newRoom.trim() === '')
+      return handleToastError('Empty room name, please fill in.')
 
     const room: RoomType = {
       title: newRoom,

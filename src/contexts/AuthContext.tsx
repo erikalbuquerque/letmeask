@@ -2,6 +2,8 @@ import { createContext, ReactNode, useState, useEffect } from 'react'
 
 import { auth, firebase } from '../services/firebase'
 
+import { useToast } from '../hooks/useToast'
+
 type User = {
   id: string
   name: string
@@ -21,6 +23,7 @@ export const AuthContext = createContext({} as AuthContextType)
 
 export function AuthProvider({ children }: AuthProviderType) {
   const [user, setUser] = useState<User>()
+  const { handleToastError } = useToast()
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
@@ -28,7 +31,7 @@ export function AuthProvider({ children }: AuthProviderType) {
         const { displayName, photoURL, uid } = user
 
         if (!displayName || !photoURL)
-          throw new Error('Missing information from Google Account.')
+          return handleToastError('Missing information from Google Account.')
 
         setUser({
           id: uid,
@@ -51,7 +54,7 @@ export function AuthProvider({ children }: AuthProviderType) {
         const { displayName, photoURL, uid } = result.user
 
         if (!displayName || !photoURL)
-          throw new Error('Missing information from Google Account.')
+          return handleToastError('Missing information from Google Account.')
 
         setUser({
           id: uid,
