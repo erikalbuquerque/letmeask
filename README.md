@@ -1,46 +1,71 @@
-# Getting Started with Create React App
+<p align="center">
+  <img alt="Letmeask" src=".github/logo.svg" width="160px">
+</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center">
+  <img src="https://img.shields.io/static/v1?label=NLW&message=06&color=8257E5&labelColor=000000" alt="NLW Together 06" />
+  <img  src="https://img.shields.io/static/v1?label=license&message=MIT&color=8257E5&labelColor=000000" alt="License">
+</p>
 
-## Available Scripts
+<h1 align="center">
+    <img alt="Letmeask" src=".github/cover.svg" />
+</h1>
 
-In the project directory, you can run:
+<br>
 
-### `yarn start`
+## 💻 Project
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Letmeask is perfect for content creators to create Q&A rooms with their audience in a very organized and democratic way.
+## 🧪 Technologies
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+This project was developed with the following technologies:
 
-### `yarn test`
+- [TypeScript](https://www.typescriptlang.org/)
+- [React](https://reactjs.org)
+- [Sass](https://sass-lang.com/)
+- [Firebase](https://firebase.google.com/)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## ✨ Additional features
+- Sign out
+- Dark theme
+- Responsive layout
+- Confirmation Modal
+- [React Hot Toast](https://react-hot-toast.com/) for messages handling
+- [Eslint](https://eslint.org/) and [Prettier](https://prettier.io/) for formatting and configuration the project
+## 🚀 How to run
 
-### `yarn build`
+Clone the project and access its folder.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+$ git clone https://github.com/erikalbuquerque/letmeask
+$ cd letmeask
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+To start it, follow the steps below:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+# Install dependencies
+$ yarn
 
-### `yarn eject`
+# Start project
+$ yarn start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The app will be available in your browser at the address http://localhost:3000.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Remembering that you will need to create an account on [Firebase](https://firebase.google.com/) and a project to make a Realtime Database available.
+## 🔖 Layout
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+You can view the project layout through the link below:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- [Layout Web](https://www.figma.com/file/u0BQK8rCf2KgzcukdRRCWh/Letmeask/duplicate)
 
-## Learn More
+Remembering that you need to have an account on [Figma](http://figma.com/).
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 📝 License
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+This project is under the MIT license. See the [LICENSE](LICENSE.md) file for more details.
+
+---
+
+Made with 💜 by Rocketseat
