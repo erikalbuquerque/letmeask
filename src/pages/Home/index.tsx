@@ -30,7 +30,6 @@ export function Home() {
           history.push('/rooms/new')
         })
       )
-    history.push('/rooms/new')
   }
 
   function handleSetRoomCode(event: ChangeEvent<HTMLInputElement>) {
