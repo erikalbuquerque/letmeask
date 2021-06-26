@@ -7,15 +7,18 @@
   <img  src="https://img.shields.io/static/v1?label=license&message=MIT&color=8257E5&labelColor=000000" alt="License">
 </p>
 
-<h1 align="center">
-    <img alt="Letmeask" src=".github/cover.svg" />
-</h1>
-
-<br>
-
 ## 💻 Project
 
 Letmeask is perfect for content creators to create Q&A rooms with their audience in a very organized and democratic way.
+
+# Theme
+
+| Dark  | Light |
+:-------------------------:|:-------------------------:
+| ![](.github/light.png) | ![](.github/dark.png) |
+| ![](.github/adminLight.png) | ![](.github/adminDark.png)  |
+
+
 ## 🧪 Technologies
 
 This project was developed with the following technologies:
@@ -26,11 +29,13 @@ This project was developed with the following technologies:
 - [Firebase](https://firebase.google.com/)
 
 ## ✨ Additional features
+
 - Sign out
 - Dark theme
 - Confirmation Modal
 - [React Hot Toast](https://react-hot-toast.com/) for messages handling
 - [Eslint](https://eslint.org/) and [Prettier](https://prettier.io/) for formatting and configuration the project
+
 ## 🚀 How to run
 
 Clone the project and access its folder.
@@ -53,6 +58,7 @@ $ yarn start
 The app will be available in your browser at the address http://localhost:3000.
 
 Remembering that you will need to create an account on [Firebase](https://firebase.google.com/) and a project to make a Realtime Database available.
+
 ## 🔖 Layout
 
 You can view the project layout through the link below:
@@ -67,4 +73,4 @@ This project is under the MIT license. See the [LICENSE](LICENSE.md) file for mo
 
 ---
 
-Made with 💜 by Rocketseat
+Made with 💜 by Erik Albuquerque
