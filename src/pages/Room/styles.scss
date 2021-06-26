@@ -1,4 +1,9 @@
 #page-room {
+  .switch {
+    position: absolute;
+    right: 1rem;
+    top: 1.9rem;
+  }
   header {
     padding: 1.5rem;
     border-bottom: 1px solid var(--gray);
@@ -16,16 +21,24 @@
         gap: 1rem;
         button {
           height: 2.5rem;
-        }
-        #logout-button {
-          background: transparent;
-          padding: 0;
-          gap: 0.5rem;
-          color: var(--text);
-          &:hover {
-            text-decoration: underline;
+          &#logout-button {
+            background: transparent;
+            padding: 0;
+            gap: 0.5rem;
+            color: var(--text);
+            &:hover {
+              text-decoration: underline;
+            }
           }
         }
+      }
+    }
+  }
+  header.dark {
+    border-color: var(--gray-600);
+    button {
+      &#logout-button {
+        color: var(--gray-200) !important;
       }
     }
   }
@@ -51,6 +64,11 @@
         color: var(--white-50);
       }
     }
+    .room-title.dark {
+      h1 {
+        color: var(--white-50);
+      }
+    }
     form {
       textarea {
         width: 100%;
@@ -61,6 +79,10 @@
         box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
         resize: vertical;
         min-height: 130px;
+      }
+      textarea.dark {
+        background: var(--black-200);
+        color: var(--white-50);
       }
       .form-footer {
         display: flex;
@@ -97,9 +119,20 @@
           }
         }
       }
+      .form-footer.dark {
+        span {
+          color: var(--gray-50);
+        }
+        .user-info {
+          span {
+            color: var(--white-300);
+          }
+        }
+      }
     }
     .question-list {
       margin-top: 2rem;
+      margin-bottom: 2rem;
     }
   }
 }

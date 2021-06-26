@@ -8,15 +8,19 @@ import { database } from '../../services/firebase'
 import { useAuth } from '../../hooks/useAuth'
 import { useRoom } from '../../hooks/useRoom'
 import { useToast } from '../../hooks/useToast'
+import { useTheme } from '../../hooks/useTheme'
 
 import { Button } from '../../components/Button'
 import { RoomCode } from '../../components/RoomCode'
 import { Question } from '../../components/Question'
+import { Switch } from '@material-ui/core'
 import Modal from 'react-modal'
 
 import logoImg from '../../assets/images/logo.svg'
+import logoLightImg from '../../assets/images/logo-light.svg'
 
 import './styles.scss'
+import '../../styles/modal.scss'
 
 type RoomParams = {
   id: string
@@ -26,6 +30,8 @@ export function Room() {
   const history = useHistory()
 
   const { user, signInWithGoogle, signOut } = useAuth()
+
+  const { isDark, handleSetTheme } = useTheme()
 
   const { handleToastError, handleToastPromise } = useToast()
 
@@ -94,9 +100,19 @@ export function Room() {
 
   return (
     <div id="page-room">
-      <header>
+      <Switch
+        className="switch"
+        defaultChecked
+        color="default"
+        onClick={handleSetTheme}
+      />
+      <header className={cx({ dark: isDark })}>
         <div className="content">
-          <img src={logoImg} alt="Letmeask" />
+          {isDark ? (
+            <img src={logoLightImg} alt="Letmeask" />
+          ) : (
+            <img src={logoImg} alt="Letmeask" />
+          )}
           <div>
             <RoomCode code={roomId} />
             <Button
@@ -140,19 +156,20 @@ export function Room() {
       </header>
 
       <main>
-        <div className="room-title">
+        <div className={cx('room-title', { dark: isDark })}>
           <h1>Sala {title}</h1>
           {questions.length > 0 && <span>{questions.length} pergunta(s)</span>}
         </div>
 
         <form onSubmit={handleSendQuestion}>
           <textarea
+            className={cx({ dark: isDark })}
             placeholder="O que você quer perguntar?"
             onChange={handleSetNewQuestion}
             value={newQuestion}
           />
 
-          <div className="form-footer">
+          <div className={cx('form-footer', { dark: isDark })}>
             {user ? (
               <div className="user-info">
                 <img src={user.avatar} alt={user.name} />
@@ -222,8 +239,8 @@ export function Room() {
         isOpen={!!closeLogoutModalOpen}
         onRequestClose={handleCloseLogoutModal}
         ariaHideApp={false}
-        className="modal"
-        overlayClassName="overlay"
+        className={cx('modal', { dark: isDark })}
+        overlayClassName={cx('overlay', { dark: isDark })}
       >
         <div className="content">
           <h1>Quer mesmo sair? :/</h1>

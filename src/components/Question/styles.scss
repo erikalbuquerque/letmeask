@@ -64,3 +64,48 @@
     }
   }
 }
+
+.question.dark {
+  background: var(--black-200);
+  p {
+    color: var(--white-50);
+  }
+  &.highlighted {
+    background: var(--purple-100) !important;
+    border: 0;
+    footer .user-info span {
+      color: var(--gray-100);
+      font-weight: bold;
+    }
+    footer button {
+      &.like-button {
+        color: var(--gray-400);
+        svg path {
+          stroke: var(--gray-50);
+        }
+        &.liked {
+          color: var(--gray-50);
+          svg path {
+            stroke: var(--gray-50);
+          }
+        }
+      }
+    }
+    footer {
+      div {
+        button {
+          svg path,
+          circle {
+            stroke: var(--gray-50);
+          }
+        }
+      }
+    }
+  }
+  &.answered {
+    background: var(--gray-700) !important;
+    footer .user-info span {
+      color: var(--gray-200);
+    }
+  }
+}

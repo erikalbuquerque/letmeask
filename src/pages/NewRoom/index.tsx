@@ -2,15 +2,20 @@
 /* eslint-disable no-use-before-define */
 import React, { FormEvent, ChangeEvent, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
+import cx from 'classnames'
+
 import { database } from '../../services/firebase'
 import { useAuth } from '../../hooks/useAuth'
+import { useTheme } from '../../hooks/useTheme'
 
 import { useToast } from '../../hooks/useToast'
 
 import illustrationImg from '../../assets/images/illustration.svg'
 import logoImg from '../../assets/images/logo.svg'
+import logoLightImg from '../../assets/images/logo-light.svg'
 
 import { Button } from '../../components/Button'
+import { Switch } from '@material-ui/core'
 
 import './styles.scss'
 
@@ -22,6 +27,8 @@ type RoomType = {
 export function NewRoom() {
   const history = useHistory()
   const { user } = useAuth()
+
+  const { isDark, handleSetTheme } = useTheme()
 
   const { handleToastError } = useToast()
 
@@ -51,7 +58,13 @@ export function NewRoom() {
 
   return (
     <div id="page-auth">
-      <aside>
+      <Switch
+        className="switch"
+        defaultChecked
+        color="default"
+        onClick={handleSetTheme}
+      />
+      <aside className={cx({ dark: isDark })}>
         <img
           src={illustrationImg}
           alt="Ilustração simbolizando perguntas e respostas"
@@ -61,11 +74,16 @@ export function NewRoom() {
       </aside>
 
       <main>
-        <div className="main-content">
-          <img src={logoImg} alt="Letmeask" />
+        <div className={cx('main-content', { dark: isDark })}>
+          {isDark ? (
+            <img src={logoLightImg} alt="Letmeask" />
+          ) : (
+            <img src={logoImg} alt="Letmeask" />
+          )}
           <h2>Criar uma nova sala</h2>
           <form onSubmit={handleCreateRoom}>
             <input
+              className={cx({ dark: isDark })}
               type="text"
               placeholder="Nome da sala"
               onChange={handleSetNewRoom}

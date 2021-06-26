@@ -2,6 +2,11 @@
   display: flex;
   align-items: stretch;
   height: 100vh;
+  .switch {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+  }
   aside {
     flex: 7;
     background: var(--purple-100);
@@ -23,6 +28,15 @@
       line-height: 2rem;
       margin-top: 1rem;
       color: var(--white-200);
+    }
+  }
+  aside.dark {
+    background: var(--gray-600);
+    strong {
+      color: var(--gray-100);
+    }
+    p {
+      color: var(--gray-300);
     }
   }
   main {
@@ -50,6 +64,10 @@
         background: var(--white-50);
         border: 1px solid var(--gray-200);
         box-sizing: border-box;
+      }
+      input.dark {
+        background: var(--black-200);
+        color: var(--gray-50);
       }
       button {
         margin-top: 1rem;

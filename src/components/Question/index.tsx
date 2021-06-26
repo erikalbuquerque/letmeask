@@ -1,8 +1,9 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React, { ReactNode } from 'react'
-
 import cx from 'classnames'
+
+import { useTheme } from '../../hooks/useTheme'
 
 import './styles.scss'
 
@@ -24,10 +25,12 @@ export function Question({
   isAnswered = false,
   isHighLighted = false
 }: QuestionProps) {
+  const { isDark } = useTheme()
   return (
     <div
       className={cx(
         'question',
+        { dark: isDark },
         { answered: isAnswered },
         { highlighted: isHighLighted && !isAnswered }
       )}

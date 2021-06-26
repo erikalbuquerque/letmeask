@@ -28,7 +28,6 @@ This project was developed with the following technologies:
 ## ✨ Additional features
 - Sign out
 - Dark theme
-- Responsive layout
 - Confirmation Modal
 - [React Hot Toast](https://react-hot-toast.com/) for messages handling
 - [Eslint](https://eslint.org/) and [Prettier](https://prettier.io/) for formatting and configuration the project

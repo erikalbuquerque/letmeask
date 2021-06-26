@@ -2,16 +2,20 @@
 /* eslint-disable no-use-before-define */
 import React, { ChangeEvent, FormEvent, useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import cx from 'classnames'
 
 import { database } from '../../services/firebase'
 import { useAuth } from '../../hooks/useAuth'
 
 import { useToast } from '../../hooks/useToast'
+import { useTheme } from '../../hooks/useTheme'
 
 import illustrationImg from '../../assets/images/illustration.svg'
 import logoImg from '../../assets/images/logo.svg'
+import logoLightImg from '../../assets/images/logo-light.svg'
 import googleIconImg from '../../assets/images/google-icon.svg'
 
+import Switch from '@material-ui/core/Switch'
 import { Button } from '../../components/Button'
 
 import './styles.scss'
@@ -21,9 +25,14 @@ export function Home() {
   const { user, signInWithGoogle } = useAuth()
   const { handleToastError, handleToastPromise } = useToast()
 
+  const { isDark, handleSetTheme } = useTheme()
+
   const [roomCode, setRoomCode] = useState('')
 
   async function handleCreateRoom() {
+    if (user) {
+      history.push('/rooms/new')
+    }
     if (!user)
       handleToastPromise(
         signInWithGoogle().then(() => {
@@ -53,7 +62,13 @@ export function Home() {
 
   return (
     <div id="page-auth">
-      <aside>
+      <Switch
+        className="switch"
+        defaultChecked
+        color="default"
+        onClick={handleSetTheme}
+      />
+      <aside className={cx({ dark: isDark })}>
         <img
           src={illustrationImg}
           alt="Ilustração simbolizando perguntas e respostas"
@@ -64,7 +79,11 @@ export function Home() {
 
       <main>
         <div className="main-content">
-          <img src={logoImg} alt="Letmeask" />
+          {isDark ? (
+            <img src={logoLightImg} alt="Letmeask" />
+          ) : (
+            <img src={logoImg} alt="Letmeask" />
+          )}
           <button onClick={handleCreateRoom} className="create-room">
             <img src={googleIconImg} alt="Logo do Google" />
             Crie sua sala com o Google
@@ -74,6 +93,7 @@ export function Home() {
 
           <form onSubmit={handleJoinRoom}>
             <input
+              className={cx({ dark: isDark })}
               type="text"
               placeholder="Digite o código da sala"
               onChange={handleSetRoomCode}
