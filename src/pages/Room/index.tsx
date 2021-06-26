@@ -2,7 +2,7 @@
 /* eslint-disable no-use-before-define */
 import React, { ChangeEvent, FormEvent, useState } from 'react'
 import cx from 'classnames'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 
 import { database } from '../../services/firebase'
 import { useAuth } from '../../hooks/useAuth'
@@ -12,6 +12,7 @@ import { useToast } from '../../hooks/useToast'
 import { Button } from '../../components/Button'
 import { RoomCode } from '../../components/RoomCode'
 import { Question } from '../../components/Question'
+import Modal from 'react-modal'
 
 import logoImg from '../../assets/images/logo.svg'
 
@@ -22,9 +23,13 @@ type RoomParams = {
 }
 
 export function Room() {
-  const { user, signInWithGoogle } = useAuth()
+  const history = useHistory()
+
+  const { user, signInWithGoogle, signOut } = useAuth()
 
   const { handleToastError, handleToastPromise } = useToast()
+
+  const [closeLogoutModalOpen, setCloseLogoutModalOpen] = useState(false)
 
   const { id } = useParams<RoomParams>()
   const roomId = id
@@ -78,12 +83,59 @@ export function Room() {
     }
   }
 
+  function handleLogout() {
+    signOut()
+    history.push('/')
+  }
+
+  function handleCloseLogoutModal() {
+    setCloseLogoutModalOpen(!closeLogoutModalOpen)
+  }
+
   return (
     <div id="page-room">
       <header>
         <div className="content">
           <img src={logoImg} alt="Letmeask" />
-          <RoomCode code={roomId} />
+          <div>
+            <RoomCode code={roomId} />
+            <Button
+              id="logout-button"
+              type="button"
+              onClick={handleCloseLogoutModal}
+            >
+              <svg
+                width="21"
+                height="20"
+                viewBox="0 0 21 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M13 2.5H16.3333C16.7754 2.5 17.1993 2.67559 17.5118 2.98816C17.8244 3.30072 18 3.72464 18 4.16667V15.8333C18 16.2754 17.8244 16.6993 17.5118 17.0118C17.1993 17.3244 16.7754 17.5 16.3333 17.5H13"
+                  stroke="#E73F5D"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M7 5.83332L2.83333 9.99999L7 14.1667"
+                  stroke="#E73F5D"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M13 10H3"
+                  stroke="#E73F5D"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              Sair
+            </Button>
+          </div>
         </div>
       </header>
 
@@ -166,6 +218,25 @@ export function Room() {
           ))}
         </div>
       </main>
+      <Modal
+        isOpen={!!closeLogoutModalOpen}
+        onRequestClose={handleCloseLogoutModal}
+        ariaHideApp={false}
+        className="modal"
+        overlayClassName="overlay"
+      >
+        <div className="content">
+          <h1>Quer mesmo sair? :/</h1>
+          <div>
+            <Button type="button" onClick={handleCloseLogoutModal}>
+              Cancelar
+            </Button>
+            <Button type="button" onClick={() => handleLogout()}>
+              Sim, sair
+            </Button>
+          </div>
+        </div>
+      </Modal>
     </div>
   )
 }

@@ -17,6 +17,15 @@
         button {
           height: 2.5rem;
         }
+        #logout-button {
+          background: transparent;
+          padding: 0;
+          gap: 0.5rem;
+          color: var(--text);
+          &:hover {
+            text-decoration: underline;
+          }
+        }
       }
     }
   }

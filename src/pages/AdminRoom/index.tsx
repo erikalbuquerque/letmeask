@@ -6,6 +6,7 @@ import { useHistory, useParams } from 'react-router-dom'
 
 import { database } from '../../services/firebase'
 
+import { useAuth } from '../../hooks/useAuth'
 import { useRoom } from '../../hooks/useRoom'
 
 import { Button } from '../../components/Button'
@@ -27,6 +28,7 @@ type RoomParams = {
 
 export function AdminRoom() {
   const history = useHistory()
+  const { signOut } = useAuth()
 
   const { id } = useParams<RoomParams>()
   const roomId = id
@@ -37,6 +39,7 @@ export function AdminRoom() {
     string | undefined
   >()
   const [closeRoomModalOpen, setCloseRoomModalOpen] = useState(false)
+  const [closeLogoutModalOpen, setCloseLogoutModalOpen] = useState(false)
 
   async function handleEndRoom() {
     const currentDate = { endedAt: new Date() }
@@ -52,6 +55,15 @@ export function AdminRoom() {
 
   function handleCloseQuestionModal() {
     setQuestionModalOpen(undefined)
+  }
+
+  function handleCloseLogoutModal() {
+    setCloseLogoutModalOpen(!closeLogoutModalOpen)
+  }
+
+  function handleLogout() {
+    signOut()
+    history.push('/')
   }
 
   async function handleDeleteQuestion(questionId: string | undefined) {
@@ -78,8 +90,48 @@ export function AdminRoom() {
           <img src={logoImg} alt="Letmeask" />
           <div>
             <RoomCode code={roomId} />
-            <Button isOutlined onClick={handleCloseRoomModal}>
+            <Button
+              id="closeRoom-button"
+              isOutlined
+              onClick={handleCloseRoomModal}
+            >
               Encerrar sala
+            </Button>
+            <Button
+              id="logout-button"
+              type="button"
+              onClick={handleCloseLogoutModal}
+            >
+              <svg
+                width="21"
+                height="20"
+                viewBox="0 0 21 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M13 2.5H16.3333C16.7754 2.5 17.1993 2.67559 17.5118 2.98816C17.8244 3.30072 18 3.72464 18 4.16667V15.8333C18 16.2754 17.8244 16.6993 17.5118 17.0118C17.1993 17.3244 16.7754 17.5 16.3333 17.5H13"
+                  stroke="#E73F5D"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M7 5.83332L2.83333 9.99999L7 14.1667"
+                  stroke="#E73F5D"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M13 10H3"
+                  stroke="#E73F5D"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              Sair
             </Button>
           </div>
         </div>
@@ -220,6 +272,26 @@ export function AdminRoom() {
             </Button>
             <Button type="button" onClick={() => handleEndRoom()}>
               Sim, encerar
+            </Button>
+          </div>
+        </div>
+      </Modal>
+
+      <Modal
+        isOpen={!!closeLogoutModalOpen}
+        onRequestClose={handleCloseLogoutModal}
+        ariaHideApp={false}
+        className="modal"
+        overlayClassName="overlay"
+      >
+        <div className="content">
+          <h1>Quer mesmo sair? :/</h1>
+          <div>
+            <Button type="button" onClick={handleCloseLogoutModal}>
+              Cancelar
+            </Button>
+            <Button type="button" onClick={() => handleLogout()}>
+              Sim, sair
             </Button>
           </div>
         </div>
