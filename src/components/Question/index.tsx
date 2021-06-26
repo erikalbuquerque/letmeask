@@ -1,4 +1,6 @@
-import { ReactNode } from 'react'
+/* eslint-disable no-use-before-define */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+import React, { ReactNode } from 'react'
 
 import cx from 'classnames'
 
@@ -36,9 +38,7 @@ export function Question({
           <img src={author.avatar} alt={author.name} />
           <span>{author.name}</span>
         </div>
-        <div>
-          {children}
-        </div>
+        <div>{children}</div>
       </footer>
     </div>
   )

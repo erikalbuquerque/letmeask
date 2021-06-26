@@ -1,4 +1,6 @@
-import { FormEvent, ChangeEvent, useState } from 'react'
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable no-use-before-define */
+import React, { FormEvent, ChangeEvent, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { database } from '../../services/firebase'
 import { useAuth } from '../../hooks/useAuth'
@@ -18,7 +20,7 @@ type RoomType = {
 }
 
 export function NewRoom() {
-  const history = useHistory();
+  const history = useHistory()
   const { user } = useAuth()
 
   const { handleToastError } = useToast()
@@ -45,17 +47,17 @@ export function NewRoom() {
     const firebaseRoom = await roomRef.push(room)
 
     history.push(`/rooms/${firebaseRoom.key}`)
-
   }
 
   return (
     <div id="page-auth">
       <aside>
-        <img src={illustrationImg} alt="Ilustração simbolizando perguntas e respostas" />
+        <img
+          src={illustrationImg}
+          alt="Ilustração simbolizando perguntas e respostas"
+        />
         <strong>Crie salas de Q&amp;A ao-vivo</strong>
-        <p>
-          Tire as dúvidas da sua audiência em tempo-real
-        </p>
+        <p>Tire as dúvidas da sua audiência em tempo-real</p>
       </aside>
 
       <main>
@@ -69,9 +71,7 @@ export function NewRoom() {
               onChange={handleSetNewRoom}
               value={newRoom}
             />
-            <Button type="submit">
-              Criar na sala
-            </Button>
+            <Button type="submit">Criar na sala</Button>
           </form>
           <p>
             Quer entrar em uma sala existente? <Link to="/">clique aqui</Link>

@@ -1,4 +1,6 @@
-import { createContext, ReactNode, useState, useEffect } from 'react'
+/* eslint-disable no-use-before-define */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+import React, { createContext, ReactNode, useState, useEffect } from 'react'
 
 import { auth, firebase } from '../services/firebase'
 

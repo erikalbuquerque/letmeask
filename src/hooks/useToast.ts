@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import toast, { Toaster } from 'react-hot-toast'
 
 export function useToast() {
@@ -10,13 +11,17 @@ export function useToast() {
   }
 
   function handleToastPromise(promise: Promise<void>) {
-    toast.promise(promise, {
-      loading: 'Loading',
-      success: 'Login success!',
-      error: 'Login error please try again!',
-    }, {
-      position: 'top-right'
-    });
+    toast.promise(
+      promise,
+      {
+        loading: 'Loading',
+        success: 'Login success!',
+        error: 'Login error please try again!'
+      },
+      {
+        position: 'top-right'
+      }
+    )
   }
   return { Toaster, handleToastSuccess, handleToastError, handleToastPromise }
 }

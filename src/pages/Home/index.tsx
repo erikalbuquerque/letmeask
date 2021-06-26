@@ -1,4 +1,6 @@
-import { ChangeEvent, FormEvent, useState } from 'react'
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable no-use-before-define */
+import React, { ChangeEvent, FormEvent, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { database } from '../../services/firebase'
@@ -23,9 +25,11 @@ export function Home() {
 
   async function handleCreateRoom() {
     if (!user)
-      handleToastPromise(signInWithGoogle().then(() => {
-        history.push('/rooms/new')
-      }))
+      handleToastPromise(
+        signInWithGoogle().then(() => {
+          history.push('/rooms/new')
+        })
+      )
     history.push('/rooms/new')
   }
 
@@ -41,11 +45,9 @@ export function Home() {
 
     const roomRef = await database.ref(`rooms/${roomCode}`).get()
 
-    if (!roomRef.exists())
-      return handleToastError('Room does not exists.')
+    if (!roomRef.exists()) return handleToastError('Room does not exists.')
 
-    if (roomRef.val().endedAt)
-      return handleToastError('Room already closed.')
+    if (roomRef.val().endedAt) return handleToastError('Room already closed.')
 
     history.push(`rooms/${roomCode}`)
   }
@@ -53,11 +55,12 @@ export function Home() {
   return (
     <div id="page-auth">
       <aside>
-        <img src={illustrationImg} alt="Ilustração simbolizando perguntas e respostas" />
+        <img
+          src={illustrationImg}
+          alt="Ilustração simbolizando perguntas e respostas"
+        />
         <strong>Crie salas de Q&amp;A ao-vivo</strong>
-        <p>
-          Tire as dúvidas da sua audiência em tempo-real
-        </p>
+        <p>Tire as dúvidas da sua audiência em tempo-real</p>
       </aside>
 
       <main>
@@ -77,9 +80,7 @@ export function Home() {
               onChange={handleSetRoomCode}
               value={roomCode}
             />
-            <Button type="submit">
-              Entrar na sala
-            </Button>
+            <Button type="submit">Entrar na sala</Button>
           </form>
         </div>
       </main>

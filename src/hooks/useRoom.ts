@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react"
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+import { useEffect, useState } from 'react'
 
 import { database } from '../services/firebase'
-import { useAuth } from "./useAuth"
+import { useAuth } from './useAuth'
 
 type QuestionType = {
   id: string
@@ -16,20 +18,25 @@ type QuestionType = {
   likeId: string | undefined
 }
 
-type LikesType = Record<string, {
-  authorId: string
-}>
-type FirebaseQuestions = Record<string, {
-  content: string
-  author: {
-    name: string
-    avatar: string
+type LikesType = Record<
+  string,
+  {
+    authorId: string
   }
-  isHighlighted: boolean
-  isAnswered: boolean
-  likes: LikesType
-}>
-
+>
+type FirebaseQuestions = Record<
+  string,
+  {
+    content: string
+    author: {
+      name: string
+      avatar: string
+    }
+    isHighlighted: boolean
+    isAnswered: boolean
+    likes: LikesType
+  }
+>
 
 export function useRoom(roomId: string) {
   const { user } = useAuth()
@@ -41,9 +48,10 @@ export function useRoom(roomId: string) {
     return totalLikes
   }
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   function returnLikeId(likes: LikesType) {
-    const likeId = Object.entries(likes ?? {}).find(([key, like]) => like.authorId === user?.id)?.[0]
+    const likeId = Object.entries(likes ?? {}).find(
+      ([key, like]) => like.authorId === user?.id
+    )?.[0]
     return likeId
   }
 
@@ -54,17 +62,19 @@ export function useRoom(roomId: string) {
       const databaseRoom = room.val()
       const firebaseQuestions: FirebaseQuestions = databaseRoom.questions ?? {}
 
-      const parsedQuestions = Object.entries(firebaseQuestions).map(([key, value]) => {
-        return {
-          id: key,
-          content: value.content,
-          author: value.author,
-          isHighlighted: value.isHighlighted,
-          isAnswered: value.isAnswered,
-          likeCount: countLikes(value.likes),
-          likeId: returnLikeId(value.likes)
+      const parsedQuestions = Object.entries(firebaseQuestions).map(
+        ([key, value]) => {
+          return {
+            id: key,
+            content: value.content,
+            author: value.author,
+            isHighlighted: value.isHighlighted,
+            isAnswered: value.isAnswered,
+            likeCount: countLikes(value.likes),
+            likeId: returnLikeId(value.likes)
+          }
         }
-      })
+      )
 
       setTitle(databaseRoom.title)
       setQuestions(parsedQuestions)
@@ -73,7 +83,6 @@ export function useRoom(roomId: string) {
         roomRef.off('value')
       }
     })
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roomId, user?.id])
 
   return { questions, title }

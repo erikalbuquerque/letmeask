@@ -1,5 +1,9 @@
-import copyImg from '../../assets/images/copy.svg'
+/* eslint-disable no-use-before-define */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+import React from 'react'
 import { useToast } from '../../hooks/useToast'
+
+import copyImg from '../../assets/images/copy.svg'
 
 import './styles.scss'
 
@@ -16,10 +20,7 @@ export function RoomCode({ code }: RoomCodeProps) {
   }
 
   return (
-    <button
-      className="room-code"
-      onClick={copyRoomCodeToClipboard}
-    >
+    <button className="room-code" onClick={copyRoomCodeToClipboard}>
       <div>
         <img src={copyImg} alt="Copy room code" />
       </div>
